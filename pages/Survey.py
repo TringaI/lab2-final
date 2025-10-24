@@ -24,7 +24,9 @@ with st.form("survey_form"):
     if submitted:
         errors = []
 
-        if category_input not in valid_days:
+        normalized_input = category_input.strip().capitalize()
+
+        if normalized_input not in valid_days:
             errors.append("Invalid input. Please enter a valid weekday (e.g., Monday).")
 
         if not value_input.replace('.', '', 1).isdigit():
@@ -38,7 +40,7 @@ with st.form("survey_form"):
             if val.is_integer():
                 val = int(val)
 
-            new_row = pd.DataFrame([[category_input, val]], columns=["label", "value"])
+            new_row = pd.DataFrame([[normalized_input, val]], columns=["label", "value"])
 
             if os.path.exists("data.csv"):
                 new_row.to_csv("data.csv", mode="a", header=False, index=False)
@@ -46,7 +48,7 @@ with st.form("survey_form"):
                 new_row.to_csv("data.csv", mode="w", header=True, index=False)
 
             st.success("Your data has been submitted!")
-            st.write(f"You entered: **Category:** {category_input}, **Value:** {val}")
+            st.write(f"You entered: **Category:** {normalized_input}, **Value:** {val}")
 
 st.divider()
 st.header("Current Data in CSV")
