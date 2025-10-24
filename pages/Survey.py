@@ -24,13 +24,15 @@ with st.form("survey_form"):
     if submitted:
         errors = []
 
-        normalized_input = category_input.strip().capitalize()
-
-        if normalized_input not in valid_days:
+        if category_input.capitalize() not in valid_days:
             errors.append("Invalid input. Please enter a valid weekday (e.g., Monday).")
 
         if not value_input.replace('.', '', 1).isdigit():
             errors.append("Invalid input. Please enter a numeric value (e.g., 2, 2.5).")
+        else:
+            val = float(value_input)
+            if val > 24:
+                errors.append("Invalid input. Hours cannot exceed 24.")
 
         if errors:
             for error in errors:
@@ -40,7 +42,11 @@ with st.form("survey_form"):
             if val.is_integer():
                 val = int(val)
 
-            new_row = pd.DataFrame([[normalized_input, val]], columns=["label", "value"])
+            if val > 6:
+                st.info(f"{val} hours? You deserve a break! 😎")
+
+            category_input_formatted = category_input.capitalize()
+            new_row = pd.DataFrame([[category_input_formatted, val]], columns=["label", "value"])
 
             if os.path.exists("data.csv"):
                 new_row.to_csv("data.csv", mode="a", header=False, index=False)
@@ -48,7 +54,7 @@ with st.form("survey_form"):
                 new_row.to_csv("data.csv", mode="w", header=True, index=False)
 
             st.success("Your data has been submitted!")
-            st.write(f"You entered: **Category:** {normalized_input}, **Value:** {val}")
+            st.write(f"You entered: **Category:** {category_input_formatted}, **Value:** {val}")
 
 st.divider()
 st.header("Current Data in CSV")
