@@ -1,0 +1,33 @@
+{
+    "chart_title": "Average Study Hours Per Day",
+    "data_points": [
+        {
+            "label": "Monday",
+            "value": 2
+        },
+        {
+            "label": "Tuesday",
+            "value": 3
+        },
+        {
+            "label": "Wednesday",
+            "value": 4
+        },
+        {
+            "label": "Thursday",
+            "value": 2.5
+        },
+        {
+            "label": "Friday",
+            "value": 3.5
+        },
+        {
+            "label": "Saturday",
+            "value": 5
+        },
+        {
+            "label": "Sunday",
+            "value": 1.5
+        }
+    ]
+}
