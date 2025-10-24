@@ -30,6 +30,7 @@ with st.form("survey_form"):
         if not value_input.replace('.', '', 1).isdigit():
             errors.append("Invalid input. Please enter a numeric value (e.g., 2, 2.5).")
         else:
+            #i restricted the value for the same purpose as mentioned above for weekdays
             val = float(value_input)
             if val > 24:
                 errors.append("Invalid input. Hours cannot exceed 24.")
