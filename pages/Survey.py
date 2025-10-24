@@ -28,7 +28,7 @@ with st.form("survey_form"):
             errors.append("Invalid input. Please enter a valid weekday (e.g., Monday).")
 
         if not value_input.replace('.', '', 1).isdigit():
-            errors.append("Invalid input. Please enter a numeric value (e.g., 2.5).")
+            errors.append("Invalid input. Please enter a numeric value (e.g., 2, 2.5).")
 
         if errors:
             for error in errors:
